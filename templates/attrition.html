@@ -1,0 +1,322 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #bfdce8;
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 700px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .container h1 {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 500px;
+        margin: 0 auto 30px;
+        text-align: center;
+        color: white;
+        font-size: 1.5em;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .form-section {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-left: 4px solid #667eea;
+    }
+
+    .form-section h3 {
+        margin-top: 0;
+        color: #333;
+        font-size: 1.1em;
+        margin-bottom: 15px;
+    }
+
+    .form-row {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        flex: 1;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+        font-weight: 500;
+        font-size: bold;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        width: 100%;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        background-color: white;
+        box-sizing: border-box;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    }
+
+    button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 14px 40px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        display: block;
+        margin: 30px auto 0;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    }
+
+    button:active {
+        transform: translateY(0);
+    }
+
+    .result-container {
+        max-width: 700px;
+        margin: 30px auto 0;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+
+    .result-container h3 {
+        color: #667eea;
+        margin-bottom: 15px;
+        font-size: 1.2em;
+    }
+
+    .result-container h1 {
+        text-align: center;
+        padding: 20px;
+        border-radius: 10px;
+        color: white;
+        font-size: 1.8em;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+</style>
+<body>
+    <div class="container">
+    <h1>IBM Employee Attrition Prediction</h1>
+    <form method="POST">
+        <label for="BusinessTravel">Business Travel:</label>
+        <select id="BusinessTravel" name="BusinessTravel" required>
+            <option value="Travel_Rarely">Travel Rarely</option>
+            <option value="Travel_Frequently">Travel Frequently</option>
+            <option value="Non_Travel">Non-Travel</option>
+        </select>
+        <br>
+        <label for="Department">Department:</label>
+        <select id="Department" name="Department" required>
+            <option value="Sales">Sales</option>
+            <option value="Research & Development">Research & Development</option>
+            <option value="Human Resources">Human Resources</option>
+        </select>
+        <br>
+        <label for="DailyRate">Daily Rate:</label>
+        <input type="number" id="DailyRate" name="DailyRate" required>
+        <br>
+        <label for="DistanceFromHome">Distance From Home:</label>
+        <input type="number" id="DistanceFromHome" name="DistanceFromHome" required>
+        <br>
+        <label for="Education">Education:</label>
+        <select id="Education" name="Education" required>
+            <option value=1>Below College</option>
+            <option value=2>College</option>
+            <option value=3>Bachelor</option>
+            <option value=4>Master</option>
+            <option value=5>Doctor</option>
+        </select>
+        <br>
+        <label for="EducationField">Education Field:</label>
+        <select id="EducationField" name="EducationField" required>
+            <option value="Life Sciences">Life Sciences</option>
+            <option value="Medical">Medical</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Technical Degree">Technical Degree</option>
+            <option value="Human Resources">Human Resources</option>
+            <option value="Other">Other</option>
+        </select>
+        <br>
+        <label for="EnvironmentSatisfaction">Environment Satisfaction:</label>
+        <select id="EnvironmentSatisfaction" name="EnvironmentSatisfaction" required>
+            <option value=1>Low</option>
+            <option value=2>Medium</option>
+            <option value=3>High</option>
+            <option value=4>Very High</option>
+        </select>
+        <br>
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        <br>
+        <label class="job_role">Job Role:</label>
+        <select id="job_role" name="job_role" required>
+            <option value="Sales Executive">Sales Executive</option>
+            <option value="Research Scientist">Research Scientist</option>
+            <option value="Laboratory Technician">Laboratory Technician</option>
+            <option value="Manufacturing Director">Manufacturing Director</option>
+            <option value="Healthcare Representative">Healthcare Representative</option>
+            <option value="Manager">Manager</option>
+            <option value="Sales Representative">Sales Representative</option>
+            <option value="Research Director">Research Director</option>
+            <option value="Human Resources">Human Resources</option>
+        </select>
+        <br>
+        <label for="MaritalStatus">Marital Status:</label>
+        <select id="MaritalStatus" name="MaritalStatus" required>
+            <option value="Single">Single</option>
+            <option value="Married">Married</option>
+            <option value="Divorced">Divorced</option>
+        </select>
+        <br>
+        <label for="OverTime">Over Time:</label>
+        <select id="OverTime" name="OverTime" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+        <br>
+        <label for="job_level">Job Level:</label>
+        <select id="job_level" name="job_level" required>
+            <option value=1>Level 1</option>
+            <option value=2>Level 2</option>
+            <option value=3>Level 3</option>
+            <option value=4>Level 4</option>
+            <option value=5>Level 5</option>
+        </select>
+        <br>
+        <label for="jobSatisfaction">Job Satisfaction:</label>
+        <select id="jobSatisfaction" name="jobSatisfaction" required>
+            <option value=1>Low</option>
+            <option value=2>Medium</option>
+            <option value=3>High</option>
+            <option value=4>Very High</option>
+        </select>
+        <br>
+        <label for="WorkLifeBalance">Work Life Balance:</label>
+        <select id="WorkLifeBalance" name="WorkLifeBalance" required>
+            <option value=1>Low</option>
+            <option value=2>Medium</option>
+            <option value=3>High</option>
+            <option value=4>Very High</option>
+        </select>
+        <br>
+        <label for="RelationshipSatisfaction">Relationship Satisfaction:</label>
+        <select id="RelationshipSatisfaction" name="RelationshipSatisfaction" required>
+            <option value=1>Low</option>
+            <option value=2>Medium</option>
+            <option value=3>High</option>
+            <option value=4>Very High</option>
+        </select>
+        <br>
+        <label for="performance_rating">Performance Rating:</label>
+        <select id="performance_rating" name="performance_rating" required>
+            <option value=1>Low</option>
+            <option value=2>Medium</option>
+            <option value=3>High</option>
+            <option value=4>Very High</option>
+        </select>
+        <br>
+        <label for="stock_option">Stock Option Level:</label>
+        <select id="stock_option" name="stock_option" required>
+            <option value=0>Low</option>
+            <option value=1>Medium</option>
+            <option value=2>High</option>
+            <option value=3>Very High</option>
+        </select>
+        <br>
+        <label for="job_involvement">Job Involvement:</label>
+        <select id="job_involvement" name="job_involvement" required>
+            <option value=1>Low</option>
+            <option value=2>Medium</option>
+            <option value=3>High</option>
+            <option value=4>Very High</option>
+        </select>
+        <br>
+        <label for="monthly_income">Monthly Income:</label>
+        <input type="number" id="monthly_income" name="monthly_income" required>
+        <br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+        <br>
+        <label for="total_working_years">Total Working Years:</label>
+        <input type="number" id="total_working_years" name="total_working_years" required>
+        <br>
+        <label for="years_at_company">Years at Company:</label>
+        <input type="number" id="years_at_company" name="years_at_company" required>
+        <br>
+        <label for="years_since_last_promotion">Years Since Last Promotion:</label>
+        <input type="number" id="years_since_last_promotion" name="years_since_last_promotion" required>
+        <br>
+        <label for="years_in_current_role">Years in Current Role:</label>
+        <input type="number" id="years_in_current_role" name="years_in_current_role" required>
+        <br>
+        <label for="years_with_current_manager">Years with Current Manager:</label>
+        <input type="number" id="years_with_current_manager" name="years_with_current_manager" required>
+        <br>
+        <label for="hourly_rate">Hourly Rate:</label>
+        <input type="number" id="hourly_rate" name="hourly_rate" placeholder="e.g. 42" required>
+        <br>
+        <label for="monthly_rate">Monthly Rate:</label>
+        <input type="number" id="monthly_rate" name="monthly_rate" placeholder="e.g. 10261" required>
+        <br>
+        <label for="percent_salary_hike">Percent Salary Hike:</label>
+        <input type="number" id="percent_salary_hike" name="percent_salary_hike" placeholder="e.g. 13" required>
+        <br>
+        <label for="training_times_last_year">Training Times Last Year:</label>
+        <input type="number" id="training_times_last_year" name="training_times_last_year" placeholder="e.g. 5" required>
+        <br>
+        <label for="number_companies_worked">Number of Companies Worked:</label>
+        <input type="number" id="number_companies_worked" name="number_companies_worked" placeholder="e.g. 3" required>
+        <br>
+        <button type="submit">Predict</button>
+    </form>
+    </div>
+    <div class="result-container">
+            <h3>Result</h3>
+            <br>
+            <h1>{{result}}</h1>
+        </div>
+</body>
+{% endblock %}
