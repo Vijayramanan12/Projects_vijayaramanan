@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VR_Project section</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #e6e4e1;
+        margin: 0;
+        padding: 20px;
+    }
+    .project-list {
+        margin-bottom: 40px;
+    }
+    .project-list h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #f0a55f;
+    }
+    .project {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .project-item {
+        display: flex;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 10px;
+        transition: box-shadow 0.3s;
+    }
+
+    .project-item:hover {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-item a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        padding: 8px 15px;
+        border: 2px solid #007bff;
+        border-radius: 5px;
+        margin: 5px;
+        transition: all 0.3s ease;
+    }
+
+    .project-item a:hover,
+    .project-item a:focus {
+        
+        background-color: #007bff;
+        color: white;
+        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.4);
+    }
+    footer {
+        text-align: center;
+        margin-top: 40px;
+        color: #eae2e2;
+    }
+</style>
+<body>
+    <div class="project-list">
+        <h1>Project List</h1>
+        <div class="project-item">
+            <a href="{{ url_for('diabetes_prediction')}}">Project 1</a>
+            <a href="{{ url_for('attrition_prediction')}}">Project 2</a>
+        </div>
+    </div>
+    {% block content %}
+    {% endblock %}
+    <footer>
+        <p>&copy; 2026 Vijayaramanan</p>
+    </footer>
+    
+</body>
+</html>
