@@ -10,7 +10,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn import svm
 import joblib
 
-data = pd.read_csv('/Users/vijayramanan/VS code/diabetes.csv')
+data = pd.read_csv('machineLearning/diabetes.csv')
 df = pd.DataFrame(data)
 # print(df)
 
@@ -48,7 +48,10 @@ rf_model.fit(X_train,y_train)
 lr_predicted = lr_model.predict(X_test)
 rf_predicted = rf_model.predict(X_test)
 
-#joblib.dump(lr_model, 'trained_model.pkl')
+# To save the model
+
+# joblib.dump(lr_model, 'trained_model.pkl')
+
 accuracy1 = accuracy_score(y_test,lr_predicted)
 accuracy2 = accuracy_score(y_test,rf_predicted)
 
@@ -64,6 +67,7 @@ print(f"CV accuracy of random forest: {rf_mean:.2f}")
 
 
 # user input
+
 # user_value = []
 # for col in X.columns:
 #     user_value.append(float(input(f"Enter {col} value: ")))
