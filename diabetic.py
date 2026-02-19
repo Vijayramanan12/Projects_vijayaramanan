@@ -56,10 +56,10 @@ lr_score = cross_val_score(lr_model, X,y, cv=5)
 lr_mean = lr_score.mean()*100
 rf_score = cross_val_score(rf_model,X,y, cv=5)
 rf_mean = rf_score.mean()*100
-print(f"linear Accuracy in %: {accuracy1*100:.2f}")
-print(f"randon forest Accuracy in %: {accuracy2*100:.2f}")
+print(f"logistic Accuracy in %: {accuracy1*100:.2f}")
+print(f"random forest Accuracy in %: {accuracy2*100:.2f}")
 
-print(f"CV accuracy of linear model: {lr_mean:.2f}")
+print(f"CV accuracy of logistic model: {lr_mean:.2f}")
 print(f"CV accuracy of random forest: {rf_mean:.2f}")
 
 
